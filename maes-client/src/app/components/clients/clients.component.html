@@ -1,0 +1,48 @@
+<app-menu [role]="role"></app-menu>
+
+<div>
+  <h1 class="title">Clientes</h1> 
+</div>
+
+<div class="container table">
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="clientData" matSort>
+    
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let client">{{client.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Primer Apellido</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let client">{{client.last_name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="second_last_name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Segundo Apellido</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let client">{{client.second_last_name}}</mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Correo</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let client">{{client.email}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telephone_number">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let client">{{client.telephone_number}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let barber">
+        <i class="far fa-edit edit" (click)="edit(product)"></i>
+        <i class="fas fa-trash-alt delete" (click)="delete(product)"></i>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>

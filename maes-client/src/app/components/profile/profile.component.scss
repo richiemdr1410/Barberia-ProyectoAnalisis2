@@ -1,0 +1,46 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+ 
+a:hover, a:active{
+    color: lightgray;
+}
+ 
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+mat-toolbar{
+    border-radius: 3px;
+}
+ 
+@media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0px;
+    }
+}
+
+.card {
+    margin-top: 10px;
+    max-width: 300px;
+    margin-bottom: 50px;
+    margin-left: 43px;
+    float: left;
+    width: calc(100% - 70px);
+    height: calc(100% - 70px);
+}
+
+.opcion {
+    color: black !important;
+    border: 1px solid !important;
+    border-radius: 15px;
+    background-color: lightgray;
+    text-align: center;
+}
+
+.storage {
+    margin-top: 20px;
+}

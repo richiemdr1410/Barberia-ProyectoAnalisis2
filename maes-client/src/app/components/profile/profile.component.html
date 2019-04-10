@@ -1,0 +1,62 @@
+<app-menu [role]="role"></app-menu>
+<div *ngIf="role && role.name === 'admin'">
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Productos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <a class="opcion " routerLink="/products" routerLinkActive="active" mat-menu-item>Ver Inventario</a>
+
+      <div class="storage" *ngIf="storage">
+        <mat-chip-list>
+          <mat-chip color="warn" routerLink="/storage" routerLinkActive="active" selected>{{storage}} productos requieren de su atención</mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+
+
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Servicios</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <a class="opcion " routerLink="/services" routerLinkActive="active" mat-menu-item>Ver Servicios</a>
+    </mat-card-content>
+    <mat-card-actions>
+
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Clientes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <a class="opcion " routerLink="/clients" routerLinkActive="active" mat-menu-item>Ver Clientes</a>
+    </mat-card-content>
+    <mat-card-actions>
+
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Barberos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <a class="opcion " routerLink="/barbers" routerLinkActive="active" mat-menu-item>Administrar Barberos</a>
+    </mat-card-content>
+    <mat-card-actions>
+
+    </mat-card-actions>
+  </mat-card>
+
+  
+</div>

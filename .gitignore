@@ -1,0 +1,48 @@
+    
+/maes-api/node_modules
+/maes-api/public/hot
+/maes-api/public/storage
+/maes-api/storage/*.key
+/maes-api/vendor
+/maes-api/.env
+/maes-api/.phpunit.result.cache
+/maes-api/Homestead.json
+/maes-api/Homestead.yaml
+/maes-api/npm-debug.log
+/maes-api/yarn-error.log
+
+.DS_STORE
+
+/maes-client/dist/
+/maes-client/bazel-out
+/maes-client/integration/bazel/bazel-*
+/maes-client/e2e_test.*
+/maes-client/node_modules
+/maes-client/tools/gulp-tasks/cldr/cldr-data/
+
+# Include when developing application packages.
+/maes-client/pubspec.lock
+/maes-client/.c9
+/maes-client/.idea/
+/maes-client/.settings/
+/maes-client/.vscode/launch.json
+/maes-client/.vscode/settings.json
+/maes-client/*.swo
+/maes-client/modules/.settings
+/maes-client/modules/.vscode
+
+# Don't check in secret files
+/maes-client/*secret.js
+
+# Ignore npm/yarn debug log
+/maes-client/npm-debug.log
+/maes-client/yarn-error.log
+
+# build-analytics
+/maes-client/.build-analytics
+
+# rollup-test output
+/maes-client/modules/rollup-test/dist/
+
+# User specific bazel settings
+/maes-client/.bazelrc.user

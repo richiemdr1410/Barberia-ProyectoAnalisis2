@@ -1,0 +1,45 @@
+<div class="box">
+  <div id="header">
+    <div id="cont-lock"><i class="material-icons lock">lock</i></div>
+    <div id="bottom-head"><h1>Iniciar Sesión</h1></div>
+  </div> 
+   <form [formGroup]="myForm">
+    <div class="group">      
+      <input formControlName="email" class="inputMaterial" type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Correo</label>
+      <mat-error *ngIf="myForm.controls.email.errors">
+        <p class="error" *ngIf="myForm.controls.email.errors.required">Ingrese su email</p>
+        <p class="error" *ngIf="myForm.controls.email.errors.email">Ingrese un email válido</p>
+      </mat-error>
+    </div>
+	    <div class="group">      
+      <input formControlName="password" class="inputMaterial" type="password" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Contraseña</label>
+      <mat-error *ngIf="myForm.controls.password.errors">
+        <p class="error" *ngIf="myForm.controls.password.required">Ingrese su contraseña</p>
+      </mat-error>
+    </div>
+    <button type="submit" [disabled]="myForm.invalid" (click)="login()">Entrar</button>
+  </form>
+  <div id="footer-box"><p class="footer-text">No eres miembro?<span class="sign-up"> Registrate ahora</span></p></div>
+</div>
+
+
+<div id="container-floating">  
+  <a href="/home" target="_blank"><span class="profile-name">Mae's</span></a>
+  <div id="container-a">
+    <div id="badge">
+    </div>
+    <div id="letter">
+      <a><span>Mae's</span></a>
+    </div>  
+  </div>
+
+  <a href="https://codepen.io/collection/XyrMQr/" target="_blank"><div class="nds nd1" data-toggle="tooltip" data-placement="left" data-original-title="Codepen"></div></a>
+  <a href="  https://twitter.com/simoberny" target="_blank"><div class="nds nd3" data-toggle="tooltip" data-placement="left" data-original-title="Twitter"></div></a>
+ <a href="https://plus.google.com/105749628523180076386/posts" target="_blank"><div class="nds nd4" data-toggle="tooltip" data-placement="left" data-original-title="G+"></div></a>
+</div>
