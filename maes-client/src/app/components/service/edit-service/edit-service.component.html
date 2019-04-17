@@ -1,0 +1,20 @@
+<h1 mat-dialog-title class="title">Servicio: {{data.name}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm" class="example-form">
+    <mat-form-field >
+      <input matInput formControlName="name">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput formControlName="service_time">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="price" appNumberOnly>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()" class="button">Cancelar</button>
+  <button mat-button (click)="update()" class="button">Guardar</button>
+</div>

@@ -2,10 +2,9 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material';
-import { Product } from '../models/product.model';
-import { ProductPagination } from '../pagination/product.pagination.model';
 import { ServicesService } from '../services/services.service';
 import { Service } from '../models/service.model';
+import { ServicePagination } from '../pagination/service.pagination.model';
 
 
 export class ServiceDataSource implements DataSource<Service> {
@@ -19,7 +18,7 @@ export class ServiceDataSource implements DataSource<Service> {
     public paginator: MatPaginator
   ) { }
 
-  connect(collectionViewer: CollectionViewer): Observable<Product[]> {
+  connect(collectionViewer: CollectionViewer): Observable<Service[]> {
     return this.dataSubject.asObservable();
   }
 
@@ -33,8 +32,8 @@ export class ServiceDataSource implements DataSource<Service> {
     this.servicesService.get(params).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
-      ).subscribe((response: ProductPagination) => {
-        this.dataSubject.next(response.data as Product[]);
+      ).subscribe((response: any) => {
+        this.dataSubject.next(response.data as Service[]);
       });
   }
 }

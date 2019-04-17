@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BarberDataSource } from 'src/app/datasources/barber.datasource';
 import { AuthService } from 'src/app/services/auth.service';
 import { BarberService } from 'src/app/services/barber.service';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator, MatDialog } from '@angular/material';
 import { Barber } from 'src/app/models/barber.model';
+import { EditBarberComponent } from './edit-barber/edit-barber.component';
+import { DeleteBarberComponent } from './delete-barber/delete-barber.component';
+import { AddBarberComponent } from './add-barber/add-barber.component';
 
 @Component({
   selector: 'app-barbers',
@@ -21,6 +24,7 @@ export class BarbersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    public dialog: MatDialog,
     private auth: AuthService,
     private productService: BarberService,
   ) { }
@@ -44,16 +48,59 @@ export class BarbersComponent implements OnInit {
     this.barberData.get(params);
   }
 
-  public add() {
-    console.log('add');
+  add(barber: Barber): void {
+    const dialogRef = this.dialog.open(AddBarberComponent, {
+      width: '250px',
+      data: barber
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const params = {
+        orderBy: 'name',
+        sortedBy: 'asc',
+        searchJoin: 'and',
+        page: '1',
+        page_size: '10'
+      };
+      this.barberData.get(params);
+    });
   }
 
-  public edit(barber: Barber) {
-    console.log(barber);
+  edit(barber: Barber): void {
+    const dialogRef = this.dialog.open(EditBarberComponent, {
+      width: '250px',
+      data: barber
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const params = {
+        orderBy: 'name',
+        sortedBy: 'asc',
+        searchJoin: 'and',
+        page: '1',
+        page_size: '10'
+      };
+      this.barberData.get(params);
+    });
   }
+
 
   public delete(barber: Barber) {
-    console.log(barber);
+    const dialogRef = this.dialog.open(DeleteBarberComponent, {
+      width: '250px',
+      data: barber
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const params = {
+        orderBy: 'name',
+        sortedBy: 'asc',
+        searchJoin: 'and',
+        page: '1',
+        page_size: '10'
+      };
+      this.barberData.get(params);
+    });
   }
 
 }

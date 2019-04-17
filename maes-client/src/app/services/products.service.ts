@@ -10,7 +10,7 @@ import { Product } from '../models/product.model';
 
 export class ProductService {
 
-    public path = 'http://127.0.0.1:8000/api/product';
+  public path = 'http://127.0.0.1:8000/api/product';
 
   constructor(
     protected http: HttpClient
@@ -25,6 +25,15 @@ export class ProductService {
       );
   }
 
+  create(data: any): Promise<Product> {
+    return this.http.post(this.path, data)
+      .toPromise()
+      .then(response => {
+        return response as Product;
+      })
+      .catch(this.handleError);
+  }
+
   getStorage(): Promise<Product> {
     const path = 'http://127.0.0.1:8000/api/storage';
 
@@ -36,27 +45,51 @@ export class ProductService {
       .catch(this.handleError);
   }
 
-//   update(click: Clicks): Promise<Clicks> {
-//     const path = `${this.path}/${click.invoice}`;
+  getStorageProducts(data: any): Observable<ProductPagination> {
+    const path = 'http://127.0.0.1:8000/api/storage';
+    const params = new HttpParams({fromObject: data});
 
-//     return this.http.put(path, click)
-//       .toPromise()
-//       .then(response => {
-//         return response as Clicks;
-//       })
-//       .catch(this.handleError);
-//   }
+    return this.http.get(path, {params})
+      .pipe(
+        map((response: any) => response as ProductPagination),
+        catchError(error => observableThrowError(error))
+      );
+  }
+
+  update(product: Product): Promise<Product> {
+    const path = `${this.path}/${product.id}`;
+
+    return this.http.put(path, product)
+      .toPromise()
+      .then(response => {
+        return response as Product;
+      })
+      .catch(this.handleError);
+  }
+
+  updateStorage(product: Product): Promise<Product> {
+    const path = `http://127.0.0.1:8000/api/storage/increase/${product.id}`;
+
+    return this.http.put(path, product)
+      .toPromise()
+      .then(response => {
+        return response as Product;
+      })
+      .catch(this.handleError);
+  }
+
+  delete(id: number) {
+    const path = `${this.path}/${id}`;
+    return this.http.delete(path)
+      .pipe(
+        map((response: any) => response.data),
+        catchError(error => observableThrowError(error))
+      );
+  }
 
   extractData(result: any): any {
     return result;
   }
-
-//   create(data: Clicks): Promise<any> {
-//     return this.http.post(this.path, data)
-//       .toPromise()
-//       .then((response: any) => response as Clicks)
-//       .catch(this.handleError);
-//   }
 
   protected handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);

@@ -1,3 +1,50 @@
-<p>
-  storage works!
-</p>
+<app-menu [role]="role"></app-menu>
+
+<h1 class="title">Inventario</h1>
+<div class="container table">
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+    
+  <ng-container matColumnDef="name">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">{{product.name}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">{{product.description}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">{{product.price}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="comments">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Comentarios</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">{{product.comments}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">{{product.status ? 'Disponible' : 'Agotado'}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">{{product.quantity}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let product">
+      <i class="far fa-edit edit" (click)="edit(product)"></i>
+      <i class="fas fa-trash-alt delete" (click)="delete(product)"></i>
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>

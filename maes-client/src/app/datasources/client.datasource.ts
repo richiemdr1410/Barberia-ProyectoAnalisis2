@@ -2,7 +2,6 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material';
-import { BarberPagination } from '../pagination/barber.pagination.model';
 import { Client } from '../models/client.model';
 import { ClientService } from '../services/client.service';
 import { ClientPagination } from '../pagination/client.pagination.model';
@@ -33,7 +32,6 @@ export class ClientDataSource implements DataSource<Client> {
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
       ).subscribe((response: ClientPagination) => {
-          console.log(response);
         this.dataSubject.next(response.data as Client[]);
       });
   }

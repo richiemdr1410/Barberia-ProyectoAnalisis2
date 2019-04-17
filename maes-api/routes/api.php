@@ -27,9 +27,12 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::resource('product', 'ProductsController');
 Route::get('storage', 'ProductsController@getStorage');
+Route::put('storage/increase/{id}', 'ProductsController@increaseStorage');
 
 Route::resource('service', 'ServicesController');
+Route::resource('schedule', 'SchedulesController');
 Route::resource('barbers', 'BarbersController');
 Route::get('clients', 'UsersController@getClients');
+Route::resource('users', 'UsersController');
 
 

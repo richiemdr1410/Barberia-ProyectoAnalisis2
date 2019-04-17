@@ -16,11 +16,14 @@ class CreateBarbersTable extends Migration
 	public function up()
 	{
 		Schema::create('barbers', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('last_name');
+            $table->string('second_last_name');
             $table->string('email')->unique();
-            $table->integer('telephone_number');
+            $table->string('telephone_number');
+            $table->string('password');
+            $table->integer('role_id');
             $table->timestamps();
 		});
 	}

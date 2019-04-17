@@ -23,4 +23,6 @@ class User extends Model implements Transformable
      */
     protected $fillable = [];
 
+    protected $guarded = ['id'];
+
 }

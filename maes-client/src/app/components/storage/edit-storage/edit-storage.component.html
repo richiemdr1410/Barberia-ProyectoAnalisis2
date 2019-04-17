@@ -1,0 +1,17 @@
+<h1 mat-dialog-title class="title">Producto: {{data.name}}</h1>
+<h1 mat-dialog-title class="title">Cantidad actual: {{data.quantity}} unidades</h1>
+
+<form [formGroup]="myForm" class="">
+  <mat-form-field class="">
+    <input matInput formControlName="quantity" appNumberOnly placeholder="Cantidad por agregar">
+    <mat-icon matSuffix>add</mat-icon>
+  </mat-form-field>
+  <mat-error *ngIf="myForm.controls.quantity.errors">
+    <p class="error" *ngIf="myForm.controls.quantity.required">La cantidad es requeridad</p>
+  </mat-error>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()" class="button">Cancelar</button>
+  <button mat-button [disabled]="myForm.invalid" (click)="save()" class="button">Guardar</button>
+</div>

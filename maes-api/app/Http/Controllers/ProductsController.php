@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Entities\Product;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
+use App\Criteria\StorageCriteria;
+use App\Validators\ProductValidator;
+use App\Repositories\ProductRepository;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
-use App\Repositories\ProductRepository;
-use App\Validators\ProductValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
  * Class ProductsController.
@@ -131,17 +130,13 @@ class ProductsController extends Controller
         return view('products.edit', compact('product'));
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  ProductUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ProductUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -154,23 +149,14 @@ class ProductsController extends Controller
                 'data'    => $product->toArray(),
             ];
 
-            if ($request->wantsJson()) {
+            return response()->json($response);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
         }
     }
 
@@ -197,8 +183,28 @@ class ProductsController extends Controller
         return redirect()->back()->with('message', 'Product deleted.');
     }
 
-    public function getStorage()
+    public function getStorage(Request $request)
     {
-        return Product::where('quantity', '<', 8)->get();
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(StorageCriteria::class);
+        $products = $this->repository->paginate($request->input('page_size', 50));
+
+        return response()->json($products);
+    }
+
+    public function increaseStorage(Request $request, $id)
+    {
+        $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+        $product = Product::where('id', $id)->first();
+        $quantity = $product->quantity + $request->input('quantity');
+        Product::where('id', $id)->update(['quantity' => $quantity]);
+
+        $response = [
+            'status' => true,
+            'message' => 'Product updated.',
+            'data'    => Product::where('id', $id)->first(),
+        ];
+
+        return response()->json($response);
     }
 }

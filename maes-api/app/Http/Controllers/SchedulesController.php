@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\ScheduleCriteria;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -46,19 +48,16 @@ class SchedulesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(new ScheduleCriteria($request));
         $schedules = $this->repository->all();
 
-        if (request()->wantsJson()) {
+        return response()->json([
+            'data' => $schedules,
+        ]);
 
-            return response()->json([
-                'data' => $schedules,
-            ]);
-        }
-
-        return view('schedules.index', compact('schedules'));
     }
 
     /**

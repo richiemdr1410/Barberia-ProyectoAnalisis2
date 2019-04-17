@@ -53,18 +53,41 @@ class UsersSeeder extends Seeder
         $user3 = User::create([
             'name' => 'Andres',
             'last_name' => 'Campos',
-            'second_last_name' => 'Padro',
+            'second_last_name' => 'Prado',
             'email' => 'acp@gmail.com',
             'telephone_number' => '34563456',
             'password' => Hash::make('admin123'),
             'role_id' => $role3->id
         ]);
 
+        $user3 = User::create([
+            'name' => 'Jeffry',
+            'last_name' => 'Urbina',
+            'second_last_name' => 'Sanchez',
+            'email' => 'jus@gmail.com',
+            'telephone_number' => '34563456',
+            'password' => Hash::make('admin123'),
+            'role_id' => $role2->id
+        ]);
+
         $barbero = Barber::create([
             'name' => 'Ricardo',
             'last_name' => 'Madrigal',
+            'second_last_name' => 'Herrera',
             'email' => 'rmh@gmail.com',
-            'telephone_number' => '23452345'
+            'telephone_number' => '23452345',
+            'password' => Hash::make('admin123'),
+            'role_id' => $role2->id
+        ]);
+
+        $barbero = Barber::create([
+            'name' => 'Jeffry',
+            'last_name' => 'Urbina',
+            'second_last_name' => 'Sanchez',
+            'email' => 'jus@gmail.com',
+            'telephone_number' => '34563456',
+            'password' => Hash::make('admin123'),
+            'role_id' => $role2->id
         ]);
 
 

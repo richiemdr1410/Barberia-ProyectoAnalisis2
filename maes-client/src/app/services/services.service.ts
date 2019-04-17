@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ProductPagination } from '../pagination/product.pagination.model';
 import { throwError as observableThrowError } from 'rxjs';
+import { Service } from '../models/service.model';
 
 @Injectable({ providedIn: 'root' })
 
@@ -24,27 +25,38 @@ export class ServicesService {
       );
   }
 
-//   update(click: Clicks): Promise<Clicks> {
-//     const path = `${this.path}/${click.invoice}`;
+  create(data: any): Promise<Service> {
+    return this.http.post(this.path, data)
+      .toPromise()
+      .then(response => {
+        return response as Service;
+      })
+      .catch(this.handleError);
+  }
 
-//     return this.http.put(path, click)
-//       .toPromise()
-//       .then(response => {
-//         return response as Clicks;
-//       })
-//       .catch(this.handleError);
-//   }
+  update(service: Service): Promise<Service> {
+    const path = `${this.path}/${service.id}`;
+
+    return this.http.put(path, service)
+      .toPromise()
+      .then(response => {
+        return response as Service;
+      })
+      .catch(this.handleError);
+  }
+
+  delete(id: number) {
+    const path = `${this.path}/${id}`;
+    return this.http.delete(path)
+      .pipe(
+        map((response: any) => response.data),
+        catchError(error => observableThrowError(error))
+      );
+  }
 
   extractData(result: any): any {
     return result;
   }
-
-//   create(data: Clicks): Promise<any> {
-//     return this.http.post(this.path, data)
-//       .toPromise()
-//       .then((response: any) => response as Clicks)
-//       .catch(this.handleError);
-//   }
 
   protected handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);

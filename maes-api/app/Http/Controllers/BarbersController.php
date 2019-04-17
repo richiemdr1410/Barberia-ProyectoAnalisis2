@@ -58,13 +58,12 @@ class BarbersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  BarberCreateRequest $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(BarberCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -77,21 +76,14 @@ class BarbersController extends Controller
                 'data'    => $barber->toArray(),
             ];
 
-            if ($request->wantsJson()) {
+            return response()->json($response);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
         }
     }
 
@@ -133,14 +125,13 @@ class BarbersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  BarberUpdateRequest $request
-     * @param  string            $id
+     * @param Request $request
+     * @param  string $id
      *
      * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(BarberUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -153,23 +144,13 @@ class BarbersController extends Controller
                 'data'    => $barber->toArray(),
             ];
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            return response()->json($response);
         } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
         }
     }
 

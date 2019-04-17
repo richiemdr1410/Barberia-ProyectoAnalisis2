@@ -1,7 +1,7 @@
 <app-menu [role]="role"></app-menu>
 
 <div>
-  <h1 class="title">Clientes</h1> 
+  <h1 class="title">Clientes <i class="fas fa-plus add" (click)="add()"></i></h1> 
 </div>
 
 <div class="container table">
@@ -34,9 +34,9 @@
 
     <ng-container matColumnDef="actions">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let barber">
-        <i class="far fa-edit edit" (click)="edit(product)"></i>
-        <i class="fas fa-trash-alt delete" (click)="delete(product)"></i>
+      <mat-cell mat-cell *matCellDef="let client">
+        <i class="far fa-edit edit" (click)="edit(client)"></i>
+        <i class="fas fa-trash-alt delete" (click)="delete(client)"></i>
       </mat-cell>
     </ng-container>
 

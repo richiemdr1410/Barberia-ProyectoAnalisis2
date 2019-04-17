@@ -9,10 +9,11 @@
         <a *ngIf="role.name === 'admin'" routerLink="/services" routerLinkActive="active" mat-button>Servicios</a>
         <a *ngIf="role.name === 'admin'" routerLink="/clients" routerLinkActive="active" mat-button>Clientes</a>
         <a *ngIf="role.name === 'admin'" routerLink="/barbers" routerLinkActive="active" mat-button>Barberos</a>
-        <a *ngIf="role.name === 'admin'" routerLink="/" routerLinkActive="active" mat-button>Horarios</a>
-        <a *ngIf="role.name === 'barber'" routerLink="/" routerLinkActive="active" mat-button>Productos</a>
-        <a *ngIf="role.name === 'barber'" routerLink="/" routerLinkActive="active" mat-button>Horario</a>
-        <a *ngIf="role.name === 'barber'" routerLink="/" routerLinkActive="active" mat-button>Algo mas</a>
+        <a *ngIf="role.name === 'admin'" routerLink="/schedule" routerLinkActive="active" mat-button>Horarios</a>
+        <a *ngIf="role.name === 'barber'" routerLink="/products" routerLinkActive="active" mat-button>Productos</a>
+        <a *ngIf="role.name === 'barber'" routerLink="/services" routerLinkActive="active" mat-button>Servicios</a>
+        <a *ngIf="role.name === 'barber'" routerLink="/clients" routerLinkActive="active" mat-button>Clientes</a>
+        <a *ngIf="role.name === 'barber'" routerLink="/schedule" routerLinkActive="active" mat-button>Horarios</a>
         <a *ngIf="role.name === 'client'" routerLink="/" routerLinkActive="active" mat-button>Citas</a>
         <a *ngIf="role.name === 'client'" routerLink="/" routerLinkActive="active" mat-button>Productos</a>
         <a *ngIf="role.name === 'client'" routerLink="/" routerLinkActive="active" mat-button>Contacto</a>

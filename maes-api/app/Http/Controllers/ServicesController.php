@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Validators\ServiceValidator;
+use App\Repositories\ServiceRepository;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ServiceCreateRequest;
-use App\Http\Requests\ServiceUpdateRequest;
-use App\Repositories\ServiceRepository;
-use App\Validators\ServiceValidator;
 
 /**
  * Class ServicesController.
@@ -58,13 +54,12 @@ class ServicesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ServiceCreateRequest $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ServiceCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -77,21 +72,15 @@ class ServicesController extends Controller
                 'data'    => $service->toArray(),
             ];
 
-            if ($request->wantsJson()) {
+            return response()->json($response);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
+
         }
     }
 
@@ -133,14 +122,13 @@ class ServicesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ServiceUpdateRequest $request
-     * @param  string            $id
+     * @param Request $request
+     * @param  string $id
      *
      * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ServiceUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -153,23 +141,14 @@ class ServicesController extends Controller
                 'data'    => $service->toArray(),
             ];
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            return response()->json($response);
         } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
 
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 

@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   getProductsOnStorage(): any {
     this.productService.getStorage()
       .then((response: any) => {
-        this.storage = response.length;
+        this.storage = response.total;
       });
   }
 }
