@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // Material
 import { MaterialModule } from './material.module';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,27 @@ import { AddClientComponent } from './components/clients/add-client/add-client.c
 import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
 import { DeleteClientComponent } from './components/clients/delete-client/delete-client.component';
 import { AddBarberComponent } from './components/barbers/add-barber/add-barber.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AppoinmentsPageComponent } from './components/appoinments-page/appoinments-page.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { AdministratorsComponent } from './components/administrators/administrators.component';
+import { AddAdministratorComponent } from './components/administrators/add-administrator/add-administrator.component';
+import { EditAdministratorComponent } from './components/administrators/edit-administrator/edit-administrator.component';
+import { DeleteAdministratorComponent } from './components/administrators/delete-administrator/delete-administrator.component';
+import { ProductPageComponent } from './components/products/product-page/product-page.component';
+import { ServicePageComponent } from './components/service/service-page/service-page.component';
+import { DoubtsComponent } from './components/doubts/doubts.component';
+import { ProductReservationsComponent } from './components/products/product-reservations/product-reservations.component';
+import { AddProductReservationComponent } from './components/products/product-reservations/add-product-reservation/add-product-reservation.component';
+import { ProductReservationIndexComponent } from './components/products/product-reservations/product-reservation-index/product-reservation-index.component';
+import { MyProductReservationComponent } from './components/products/product-reservations/my-product-reservation/my-product-reservation.component';
+import { MyAppointmentsComponent } from './my-appointments/my-appointments.component';
+import { AskAppointmentComponent } from './components/appointments/ask-appointment/ask-appointment.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { EditCarouselComponent } from './components/carousel/edit-carousel/edit-carousel.component';
+import { DeleteCarouselComponent } from './components/carousel/delete-carousel/delete-carousel.component';
+import { AddCarouselComponent } from './components/carousel/add-carousel/add-carousel.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +91,28 @@ import { AddBarberComponent } from './components/barbers/add-barber/add-barber.c
     AddClientComponent,
     EditClientComponent,
     DeleteClientComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    AboutUsComponent,
+    ContactComponent,
+    AppoinmentsPageComponent,
+    AdministratorsComponent,
+    AddAdministratorComponent,
+    EditAdministratorComponent,
+    DeleteAdministratorComponent,
+    ProductPageComponent,
+    AppoinmentsPageComponent,
+    ServicePageComponent,
+    DoubtsComponent,
+    ProductReservationsComponent,
+    AddProductReservationComponent,
+    ProductReservationIndexComponent,
+    MyProductReservationComponent,
+    MyAppointmentsComponent,
+    AskAppointmentComponent,
+    CarouselComponent,
+    AddCarouselComponent,
+    EditCarouselComponent,
+    DeleteCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +123,8 @@ import { AddBarberComponent } from './components/barbers/add-barber/add-barber.c
     HttpClientModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
+    GooglePlaceModule,
+    NgxMaterialTimepickerModule
   ],
   entryComponents: [
     EditStorageComponent,
@@ -97,6 +142,14 @@ import { AddBarberComponent } from './components/barbers/add-barber/add-barber.c
     AddClientComponent,
     EditClientComponent,
     DeleteClientComponent,
+    AddAdministratorComponent,
+    EditAdministratorComponent,
+    DeleteAdministratorComponent,
+    AddProductReservationComponent,
+    AskAppointmentComponent,
+    AddCarouselComponent,
+    EditCarouselComponent,
+    DeleteCarouselComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

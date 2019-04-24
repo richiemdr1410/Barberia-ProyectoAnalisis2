@@ -2,15 +2,33 @@
 <div mat-dialog-content>
   <form [formGroup]="myForm" class="example-form">
     <mat-form-field >
-      <input matInput>
+      <input matInput formControlName="name" placeholder="Nombre">
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput>
+      <input matInput formControlName="description" placeholder="Descripción">
     </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="price" appNumberOnly placeholder="Precio">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput formControlName="comments" appNumberOnly placeholder="Comentario"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="quantity" appNumberOnly placeholder="Cantidad">
+    </mat-form-field>
+
+    <mat-form-field>
+      <ngx-mat-file-input formControlName="image" placeholder="Imagen" ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+    
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()" class="button">Cancelar</button>
-  <button mat-button (click)="update()" class="button">Guardar</button>
+  <button mat-button (click)="edit()" class="button">Editar</button>
 </div>

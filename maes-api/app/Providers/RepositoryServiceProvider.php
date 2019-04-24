@@ -13,7 +13,11 @@ class RepositoryServiceProvider extends ServiceProvider
         'Order',
         'Schedule',
         'Appointment',
-        'User'
+        'User',
+        'UploadImage',
+        'Reservation',
+        'ScheduleByBarber',
+        'Carousel'
 
     );
 

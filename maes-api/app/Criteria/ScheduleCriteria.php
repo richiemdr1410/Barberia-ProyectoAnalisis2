@@ -32,6 +32,6 @@ class ScheduleCriteria implements CriteriaInterface
         $date = $this->request->input('date');
         $day_of_week = date('N', strtotime($date));
 
-        return $model->where('day', $day_of_week);
+        return $model->where('day', '<>', $day_of_week);
     }
 }

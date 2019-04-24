@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\AppointmentCriteria;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\AppointmentCreateRequest;
@@ -49,6 +49,7 @@ class AppointmentsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(AppointmentCriteria::class);
         $appointments = $this->repository->all();
 
         if (request()->wantsJson()) {
@@ -200,5 +201,30 @@ class AppointmentsController extends Controller
         }
 
         return redirect()->back()->with('message', 'Appointment deleted.');
+    }
+
+    public function getAppointment(Request $request)
+    {
+
+    }
+
+    public function checkAvailable(Request $request)
+    {
+        $time = date("H:i", strtotime($request->input('time')));
+        $full_date = $request->input('date') .' '. $time.':00';
+        $inputDate = strtotime($full_date);
+        $now = strtotime(Carbon::now()->addDays(1)->format('Y/m/d H:i:s'));
+        if ($inputDate < $now) {
+            return response()->json([
+
+                'data' => false,
+            ]);
+        } else {
+            return response()->json([
+
+                'data' => true,
+            ]);
+        }
+
     }
 }

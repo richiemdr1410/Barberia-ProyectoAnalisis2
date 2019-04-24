@@ -16,11 +16,11 @@ export class ProductService {
     protected http: HttpClient
   ) { }
 
-  get(data: any): Observable<ProductPagination> {
+  get(data: any): Observable<any> {
     const params = new HttpParams({fromObject: data});
     return this.http.get(this.path, {params})
       .pipe(
-        map((response: any) => response as ProductPagination),
+        map((response: any) => response),
         catchError(error => observableThrowError(error))
       );
   }

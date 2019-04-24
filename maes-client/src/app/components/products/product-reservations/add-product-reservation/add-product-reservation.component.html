@@ -1,0 +1,15 @@
+<h1 mat-dialog-title class="title">Producto: {{data.name}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm" class="example-form">
+    <mat-form-field>
+      <input matInput type="number" formControlName="quantity" appNumberOnly placeholder="Cantidad a reservar" max="{{data.quantity}}">
+    </mat-form-field>
+    <mat-error *ngIf="myForm.controls.quantity.errors">
+      <p class="error" *ngIf="myForm.controls.quantity.errors.invalid">Cantidad invalidad para reservar</p>
+    </mat-error>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()" class="button">Cancelar</button>
+  <button mat-button (click)="reservar()" class="button" [disabled]="myForm.invalid">Reservar</button>
+</div>

@@ -3,4 +3,5 @@ export interface Service {
     name: string;
     service_time: string;
     price: number;
+    image: string;
 }

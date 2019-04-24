@@ -19,7 +19,7 @@ export class BarbersComponent implements OnInit {
   public role: any;
 
   barberData: BarberDataSource | null;
-  displayedColumns: Array<string> = ['name', 'last_name', 'email', 'telephone_number', 'actions'];
+  displayedColumns: Array<string> = ['user_id', 'name', 'last_name', 'email', 'telephone_number', 'actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

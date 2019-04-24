@@ -2,6 +2,10 @@
 <div mat-dialog-content>
   <form [formGroup]="myForm" class="example-form">
     <mat-form-field >
+      <input matInput formControlName="user_id" appNumberOnly placeholder="Cédula" maxlength="9">
+    </mat-form-field>
+
+    <mat-form-field >
       <input matInput formControlName="name" placeholder="Nombre">
     </mat-form-field>
 
@@ -15,7 +19,7 @@
 
 
     <mat-form-field >
-      <input matInput formControlName="telephone_number" appNumberOnly placeholder="Telefono">
+      <input matInput formControlName="telephone_number" appNumberOnly placeholder="Telefono" maxlength="8">
     </mat-form-field>
 
     <mat-form-field >

@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use App\Criteria\StorageCriteria;
 use App\Validators\ProductValidator;
 use App\Repositories\ProductRepository;
-use App\Http\Requests\ProductCreateRequest;
-use App\Http\Requests\ProductUpdateRequest;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -58,13 +56,11 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductCreateRequest $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProductCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -77,21 +73,12 @@ class ProductsController extends Controller
                 'data'    => $product->toArray(),
             ];
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            return response()->json($response);
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json([
+                'error'   => true,
+                'message' => $e->getMessageBag()
+            ]);
         }
     }
 

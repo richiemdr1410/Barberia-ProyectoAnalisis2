@@ -4,6 +4,16 @@
     <div id="bottom-head"><h1>Ingrese sus datos</h1></div>
   </div> 
    <form [formGroup]="myForm">
+      <div class="group">      
+        <input formControlName="user_id" class="inputMaterial" type="text" required maxlength="9" appNumberOnly>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Cédula</label>
+        <mat-error *ngIf="myForm.controls.user_id.errors">
+          <p class="error" *ngIf="myForm.controls.user_id.errors.required">Ingrese su cédula</p>
+        </mat-error>
+      </div>
+
     <div class="group">      
       <input formControlName="name" class="inputMaterial" type="text" required>
       <span class="highlight"></span>
@@ -46,7 +56,7 @@
     </div>
 
     <div class="group">      
-      <input formControlName="telephone_number" class="inputMaterial" type="text" required>
+      <input formControlName="telephone_number" class="inputMaterial" type="text" required appNumberOnly maxlength="8">
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Teléfono</label>
@@ -75,7 +85,7 @@
         <p class="error" *ngIf="myForm.controls.confirm_password.different">Contraseña diferente</p>
       </mat-error>
     </div>
-    <button type="submit" [disabled]="myForm.invalid" (click)="login()">Registrarse</button>
+    <button type="submit" [disabled]="myForm.invalid" (click)="create()">Registrarse</button>
   </form>
   <div id="footer-box"><p class="footer-text">Ya eres miembro?<span routerLink="/login" routerLinkActive="active" class="sign-up"> Ingresa a tu cuenta</span></p></div>
 </div>

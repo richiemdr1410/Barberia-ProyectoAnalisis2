@@ -31,8 +31,21 @@ Route::put('storage/increase/{id}', 'ProductsController@increaseStorage');
 
 Route::resource('service', 'ServicesController');
 Route::resource('schedule', 'SchedulesController');
-Route::resource('barbers', 'BarbersController');
 Route::get('clients', 'UsersController@getClients');
+Route::get('barbers', 'UsersController@getBarbers');
+Route::get('admins', 'UsersController@getAdministrators');
 Route::resource('users', 'UsersController');
+Route::resource('reservations', 'ReservationsController');
+Route::resource('carousel', 'CarouselsController');
+Route::resource('carousel/home', 'CarouselsController@getCarousel');
+
+Route::post('image/upload', 'UploadImagesController@saveFile');
+
+Route::get('reservation/user', 'ReservationsController@getReservationByUser');
+
+Route::post('add/appointment', 'AppointmentsController@getAppointment');
+Route::get('check/appointment', 'AppointmentsController@checkAvailable');
+
+
 
 

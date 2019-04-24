@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { BarberService } from 'src/app/services/barber.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Barber } from 'src/app/models/barber.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-delete-barber',
@@ -12,14 +12,13 @@ import { Barber } from 'src/app/models/barber.model';
 export class DeleteBarberComponent implements OnInit {
 
   constructor(
-    public service: BarberService,
+    public service: UserService,
     private alertService: AlertService,
     public dialogRef: MatDialogRef<DeleteBarberComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Barber
   ) { }
 
   ngOnInit() {
-    console.log(this.data);
   }
 
   cancel(): void {

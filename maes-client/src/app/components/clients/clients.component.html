@@ -7,6 +7,12 @@
 <div class="container table">
   <mat-table class="lessons-table mat-elevation-z8" [dataSource]="clientData" matSort>
     
+
+    <ng-container matColumnDef="user_id">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let client">{{client.user_id}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
       <mat-cell mat-cell *matCellDef="let client">{{client.name}}</mat-cell>

@@ -15,6 +15,7 @@ export class AddBarberComponent implements OnInit {
   myForm: FormGroup;
 
   newBarber = {
+    user_id: '',
     name: '',
     last_name: '',
     second_last_name: '',
@@ -34,6 +35,7 @@ export class AddBarberComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.fb.group({
+      user_id: new FormControl(''),
       name: new FormControl(''),
       last_name: new FormControl(''),
       second_last_name: new FormControl(''),
@@ -52,14 +54,6 @@ export class AddBarberComponent implements OnInit {
     this.service.create(this.newBarber)
       .then(
         success => {
-        },
-        error => {
-          this.alertService.error('Error al crear el barbero', 5, error.ExceptionMessage);
-        }
-      );
-
-      this.barberService.create(this.newBarber).then(
-        success => {
           this.alertService.success('Barbero creado');
           this.dialogRef.close();
         },
@@ -70,6 +64,7 @@ export class AddBarberComponent implements OnInit {
   }
 
   getData(): any {
+    this.newBarber.user_id = this.myForm.controls.user_id.value;
     this.newBarber.name = this.myForm.controls.name.value;
     this.newBarber.last_name = this.myForm.controls.last_name.value;
     this.newBarber.second_last_name = this.myForm.controls.second_last_name.value;

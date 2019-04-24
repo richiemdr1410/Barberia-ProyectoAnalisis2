@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\AdministratorsCriteria;
+use App\Criteria\BarbersCriteria;
 use Illuminate\Http\Request;
 use App\Criteria\ClientsCriteria;
 use App\Validators\UserValidator;
@@ -183,6 +185,26 @@ class UsersController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $this->repository->pushCriteria(ClientsCriteria::class);
+
+        $users = $this->repository->paginate($request->input('page_size', 50));
+
+        return response()->json($users);
+    }
+
+    public function getBarbers(Request $request)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(BarbersCriteria::class);
+
+        $users = $this->repository->paginate($request->input('page_size', 50));
+
+        return response()->json($users);
+    }
+
+    public function getAdministrators(Request $request)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(AdministratorsCriteria::class);
 
         $users = $this->repository->paginate($request->input('page_size', 50));
 

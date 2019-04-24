@@ -16,9 +16,14 @@ import {
   MatCardModule, MatToolbarModule,
   MatListModule, MatRadioModule,
   MatStepperModule, MatFormFieldModule,
-  MatChipsModule, MatButtonToggleModule
+  MatChipsModule, MatButtonToggleModule,
+  MAT_DATE_LOCALE,
+  MAT_DATE_FORMATS,
+  DateAdapter
 } from '@angular/material';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { CdkTableModule } from '@angular/cdk/table';
+
 
 const MATERIAL_MODULES = [
   MatButtonModule, MatMenuModule, MatCheckboxModule, MatInputModule,
@@ -28,11 +33,15 @@ const MATERIAL_MODULES = [
   MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MatTableModule,
   MatPaginatorModule, MatSortModule, MatExpansionModule, MatSlideToggleModule,
   MatCardModule, MatToolbarModule, MatListModule, MatRadioModule,
-  MatStepperModule, MatFormFieldModule, MatChipsModule, MatButtonToggleModule
+  MatStepperModule, MatFormFieldModule, MatChipsModule, MatButtonToggleModule,
+  MaterialFileInputModule
 ];
 
 @NgModule({
   imports: [MATERIAL_MODULES],
-  exports: [MATERIAL_MODULES]
+  exports: [MATERIAL_MODULES],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-CL' },
+]
 })
 export class MaterialModule { }

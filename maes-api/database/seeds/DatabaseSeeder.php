@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServicesSeeder::class);
         $this->call(ProductsSeeder::class);
         $this->call(ScheduleSeeder::class);
+        $this->call(ReservationSeeder::class);
+        $this->call(CarouselSeeder::class);
     }
 }

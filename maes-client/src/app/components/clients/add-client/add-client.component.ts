@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 export class AddClientComponent implements OnInit {
 
   newClient = {
+    user_id: '',
     name: '',
     last_name: '',
     second_last_name: '',
@@ -32,6 +33,7 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.fb.group({
+      user_id: new FormControl(''),
       name: new FormControl(''),
       last_name: new FormControl(''),
       second_last_name: new FormControl(''),
@@ -60,6 +62,7 @@ export class AddClientComponent implements OnInit {
   }
 
   getData(): any {
+    this.newClient.user_id = this.myForm.controls.user_id.value;
     this.newClient.name = this.myForm.controls.name.value;
     this.newClient.last_name = this.myForm.controls.last_name.value;
     this.newClient.second_last_name = this.myForm.controls.second_last_name.value;
