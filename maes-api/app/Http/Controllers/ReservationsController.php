@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Product;
+use App\Entities\Reservation;
 use Illuminate\Http\Request;
 use App\Criteria\ReservationCriteria;
 use App\Validators\ReservationValidator;
@@ -164,7 +165,12 @@ class ReservationsController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        $reserva = Reservation::where('reservation_id', $id)->first();
+
+        Product::where('id', $reserva->product_id)->increment('quantity', $reserva->reservation_quantity);
+
+        $deleted = Reservation::where('reservation_id', $id);
+        $deleted->delete();
 
         return response()->json([
             'message' => 'Reservation deleted.',

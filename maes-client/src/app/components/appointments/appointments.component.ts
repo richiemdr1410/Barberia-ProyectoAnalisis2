@@ -13,6 +13,16 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class AppointmentsComponent implements OnInit {
 
+  request = {
+    category_id: 0,
+    id_user: 0,
+    barber_id: 0,
+    id_service: 0,
+    time: '',
+    date: ''
+  };
+
+  category_type: number;
   normal: boolean;
   barber: boolean;
   normalDate: boolean;
@@ -21,6 +31,8 @@ export class AppointmentsComponent implements OnInit {
   service: boolean;
   serviceData: any;
   message: boolean;
+  barber_id: number;
+  barber_active: boolean;
   precio: '';
   types = [
     {value: 1, display: 'Horario de atención'},
@@ -93,21 +105,36 @@ export class AppointmentsComponent implements OnInit {
   }
 
   category(event) {
+    this.category_type = event.value;
     if (event.value === 1) {
+      this.normal = false;
       this.normal = true;
       this.barber = false;
+      this.message = false;
+      this.normalDate = false;
+      this.service = false;
     } else if (event.value === 2) {
       this.barber = true;
       this.normal = false;
+      this.message = false;
+      this.normalDate = false;
+      this.service = false;
+    }
+  }
+
+  getBarber(event) {
+    if (event.value) {
+      this.barber_id = event.value;
+      this.barber_active = true;
+      this.normal = true;
     }
   }
 
   getService(event) {
     if (event.value) {
+      this.request.id_service = event.value;
       this.message = true;
-      console.log(event.value);
       this.precio = this.serviceData.filter(x => x.id === event.value)[0].price;
-      console.log(this.precio);
     }
   }
 
@@ -141,6 +168,27 @@ export class AppointmentsComponent implements OnInit {
           this.service = false;
         }
       });
+  }
+
+  reservar() {
+    this.getParams();
+    this.appointmentService.create(this.request).then(
+      (result) => {
+        this.normal = false;
+        this.barber = false;
+        this.message = false;
+        this.normalDate = false;
+        this.service = false;
+      }
+    );
+  }
+
+  getParams() {
+    this.request.category_id = this.category_type;
+    this.request.id_user = this.user.id;
+    this.request.barber_id = this.barber_id;
+    this.request.time = this.appointment.time;
+    this.request.date = this.appointment.date;
   }
 
 }

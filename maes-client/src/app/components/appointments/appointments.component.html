@@ -13,6 +13,16 @@
       </mat-select>
     </mat-form-field>
 
+
+    <mat-form-field *ngIf="barber" class="selector">
+      <mat-label>Barbero</mat-label>
+      <mat-select (selectionChange)="getBarber($event)">
+        <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+          {{barber.name + ' ' + barber.last_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field *ngIf="normal" class="selector">
       <input matInput [matDatepicker]="picker" placeholder="Seleccione la fecha" (dateChange)="getDate($event)" disabled>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -38,22 +48,6 @@
 
     <mat-error class="title" *ngIf="message === true">La cita tendrá un costo de ₡{{precio}}. Confirmar?</mat-error>
 
-    <button mat-button *ngIf="message === true" class="button">Reservar</button>
-
-    <mat-form-field *ngIf="barber" class="selector">
-      <mat-label>Barbero</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let barber of barbers" [value]="barber.id">
-          {{barber.name + ' ' + barber.last_name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-
-    <!-- <mat-form-field class="picker">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>-->
+    <button mat-button *ngIf="message === true" class="button" (click)="reservar()">Reservar</button>
   </div>
 </div>

@@ -21,7 +21,7 @@
         <a *ngIf="role.name === 'client'" routerLink="/my-appointments" routerLinkActive="active" mat-button>Mis Citas</a>
         <a mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></a>
         <mat-menu #menu="matMenu">
-          <a routerLink="/" routerLinkActive="active" mat-menu-item>Perfil</a>
+          <a routerLink="/account" routerLinkActive="active" mat-menu-item>Perfil</a>
           <a  routerLink="/logout" routerLinkActive="active" mat-menu-item>Salir</a>
         </mat-menu>
       </div>

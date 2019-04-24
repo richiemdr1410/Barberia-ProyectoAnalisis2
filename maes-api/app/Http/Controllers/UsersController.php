@@ -137,6 +137,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request['password'] = Hash::make($request->input('password'));
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);

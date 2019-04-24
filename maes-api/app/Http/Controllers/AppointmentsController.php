@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Criteria\AppointmentCriteria;
+use App\Entities\Appointment;
+use App\Entities\Schedule;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -52,14 +55,12 @@ class AppointmentsController extends Controller
         $this->repository->pushCriteria(AppointmentCriteria::class);
         $appointments = $this->repository->all();
 
-        if (request()->wantsJson()) {
+
 
             return response()->json([
                 'data' => $appointments,
             ]);
-        }
 
-        return view('appointments.index', compact('appointments'));
     }
 
     /**
@@ -71,8 +72,9 @@ class AppointmentsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(AppointmentCreateRequest $request)
+    public function store(Request $request)
     {
+
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -84,12 +86,7 @@ class AppointmentsController extends Controller
                 'data'    => $appointment->toArray(),
             ];
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            return response()->json($response);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -147,7 +144,7 @@ class AppointmentsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(AppointmentUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -205,6 +202,38 @@ class AppointmentsController extends Controller
 
     public function getAppointment(Request $request)
     {
+        if (!$request->input('barber_id')) {
+            $request['barber_id'] = User::first()->id;
+        }
+
+        $date = $request->input('date');
+        $day_of_week = date('N', strtotime($date));
+        $time = date("H:i", strtotime($request->input('time')));
+        $schedule = Schedule::where('day', $day_of_week)->get();
+        $total = Schedule::where('day', $day_of_week)->count();
+        $valid = false;
+        for ($i = 0; $i < $total -1; $i++) {
+            if($schedule[0]->hour >= $time && $time <= $schedule[$i + 1]->hour) {
+                $valid = true;
+            }
+        }
+
+        if ($valid) {
+            $request['time'] = $time;
+            unset($request['category_id']);
+            $appointment = $this->repository->create($request->all());
+
+            return response()->json([
+                'data' => $appointment,
+            ]);
+        } else {
+            return response()->json([
+                'error'   => true,
+                'message' => 'Error'
+            ]);
+        }
+
+
 
     }
 

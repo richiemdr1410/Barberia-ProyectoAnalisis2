@@ -24,6 +24,16 @@ export class AppointmentService {
       );
   }
 
+  create(data: any): Promise<any> {
+    const path = 'http://127.0.0.1:8000/api/add/appointment';
+    return this.http.post(path, data)
+      .toPromise()
+      .then(response => {
+        return response as any;
+      })
+      .catch(this.handleError);
+  }
+
   checkAppointment(data: any): Observable<any> {
     const path = 'http://127.0.0.1:8000/api/check/appointment';
     const params = new HttpParams({fromObject: data});

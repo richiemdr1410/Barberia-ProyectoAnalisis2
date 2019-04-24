@@ -53,8 +53,8 @@ export class ReservationService {
       .catch(this.handleError);
   }
 
-  delete(id: number) {
-    const path = `${this.path}/${id}`;
+  delete(reservation_id: number) {
+    const path = `${this.path}/${reservation_id}`;
     return this.http.delete(path)
       .pipe(
         map((response: any) => response.data),

@@ -37,7 +37,7 @@ class ReservationCriteria implements CriteriaInterface
     protected function joinModel($model, $repository)
     {
 
-            return $model->join('products', 'products.id', '=', 'reservations.product_id');
+        return $model->join('products', 'products.id', '=', 'reservations.product_id');
 
 
     }

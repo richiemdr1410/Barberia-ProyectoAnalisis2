@@ -19,9 +19,10 @@ class CreateAppointmentsTable extends Migration
             $table->increments('id');
             $table->integer('barber_id');
             $table->integer('id_user');
-            $table->integer('id_schedule');
             $table->integer('id_service');
-            $table->string('status');
+            $table->string('status')->default('pending');
+            $table->time('time');
+            $table->date('date');
             $table->timestamps();
 		});
 	}

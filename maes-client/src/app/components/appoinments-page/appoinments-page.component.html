@@ -29,3 +29,58 @@
     </div>
   </div>
 </div>
+
+
+
+<div>
+  <div class="appointment">
+    <h4 class="title">A continuación, puede seleccionar un horario que se ajuste a su gusto o bien, un barbero de su preferencia</h4>
+    <h2 class="title">Recuerde que su cita debe ser agendada 24 horas con anticipación</h2>
+    <mat-form-field class="selector">
+      <mat-label>Elija su tipo de horario</mat-label>
+      <mat-select (selectionChange)="category($event)">
+        <mat-option *ngFor="let type of types" [value]="type.value">
+          {{type.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field *ngIf="barber" class="selector">
+      <mat-label>Barbero</mat-label>
+      <mat-select (selectionChange)="getBarber($event)">
+        <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+          {{barber.name + ' ' + barber.last_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="normal" class="selector">
+      <input matInput [matDatepicker]="picker" placeholder="Seleccione la fecha" (dateChange)="getDate($event)" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field class="selector" *ngIf="normalDate">
+      <input matInput placeholder="Seleccione la hora" aria-label="12hr format" [(ngModel)]="time" (ngModelChange)="getTime()" [ngxTimepicker]="default" readonly>
+      <ngx-material-timepicker #default></ngx-material-timepicker>
+    </mat-form-field>
+
+    <mat-error class="title" *ngIf="check === false">Su cita no puede ser programada 24h antes</mat-error>
+
+    <mat-form-field class="selector" *ngIf="service">
+      <mat-label>Elija el servicio</mat-label>
+      <mat-select (selectionChange)="getService($event)">
+        <mat-option *ngFor="let service of serviceData" [value]="service.id">
+          {{service.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-error class="title" *ngIf="message === true">La cita tendrá un costo de ₡{{precio}}. Por vafor, inicie sesión o registrese, nosotros le guardamos su cita</mat-error>
+
+    <button mat-button *ngIf="message === true" class="button" (click)="login()">Iniciar Sesión</button>
+    <button mat-button *ngIf="message === true" class="button" (click)="register()">Registrarse</button>
+  </div>
+</div>

@@ -84,23 +84,4 @@ export class AdministratorsComponent implements OnInit {
     });
   }
 
-
-  public delete(admin: Administrator) {
-    const dialogRef = this.dialog.open(DeleteAdministratorComponent, {
-      width: '250px',
-      data: admin
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      const params = {
-        orderBy: 'name',
-        sortedBy: 'asc',
-        searchJoin: 'and',
-        page: '1',
-        page_size: '10'
-      };
-      this.adminData.get(params);
-    });
-  }
-
 }

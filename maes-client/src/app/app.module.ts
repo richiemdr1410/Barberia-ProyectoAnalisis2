@@ -60,6 +60,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { EditCarouselComponent } from './components/carousel/edit-carousel/edit-carousel.component';
 import { DeleteCarouselComponent } from './components/carousel/delete-carousel/delete-carousel.component';
 import { AddCarouselComponent } from './components/carousel/add-carousel/add-carousel.component';
+import { AccountComponent } from './components/account/account.component';
+import { CancelReservationComponent } from './components/products/product-reservations/cancel-reservation/cancel-reservation.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,9 @@ import { AddCarouselComponent } from './components/carousel/add-carousel/add-car
     CarouselComponent,
     AddCarouselComponent,
     EditCarouselComponent,
-    DeleteCarouselComponent
+    DeleteCarouselComponent,
+    AccountComponent,
+    CancelReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -149,7 +153,8 @@ import { AddCarouselComponent } from './components/carousel/add-carousel/add-car
     AskAppointmentComponent,
     AddCarouselComponent,
     EditCarouselComponent,
-    DeleteCarouselComponent
+    DeleteCarouselComponent,
+    CancelReservationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

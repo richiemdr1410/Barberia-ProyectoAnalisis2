@@ -26,9 +26,8 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cancelar Reservas</mat-header-cell>
       <mat-cell mat-cell *matCellDef="let reservation">
-        <i class="far fa-edit edit" (click)="edit(reservation)"></i>
         <i class="fas fa-times delete" (click)="delete(reservation)"></i>
       </mat-cell>
     </ng-container>

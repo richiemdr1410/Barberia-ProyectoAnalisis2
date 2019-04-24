@@ -24,6 +24,7 @@ import { ProductReservationIndexComponent } from './components/products/product-
 import { MyProductReservationComponent } from './components/products/product-reservations/my-product-reservation/my-product-reservation.component';
 import { MyAppointmentsComponent } from './my-appointments/my-appointments.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'product-page', component: ProductPageComponent },
   { path: 'service-page', component: ServicePageComponent },
   { path: 'doubts', component: DoubtsComponent },
+  { path: 'account', canActivate: [ AuthGuard ], component: AccountComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
