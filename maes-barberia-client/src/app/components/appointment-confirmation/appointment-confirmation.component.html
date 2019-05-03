@@ -1,0 +1,12 @@
+
+<h1 mat-dialog-title class="title">Confirmar cita</h1>
+    
+<p align="center">Para: {{date}} {{hour}}</p>
+  
+<p align="center">
+  Confirme su cita o bien, puede cancelarla y agendar otra.
+</p>
+<div mat-dialog-actions align="center">
+  <button mat-button (click)="create()" class="button">Confirmar</button>
+  <button mat-button (click)="cancel()" class="button">Cancelar</button>
+</div>

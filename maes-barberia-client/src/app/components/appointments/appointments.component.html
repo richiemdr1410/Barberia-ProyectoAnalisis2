@@ -1,0 +1,129 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <img class="logo" src="assets/images/logo.jpg" alt="Italian Trulli">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="/home" class="nav-link">Inicio</a></li>
+        <li class="nav-item"><a href="/about-us" class="nav-link">Acerca de nosotros</a></li>
+        <li class="nav-item"><a href="/services" class="nav-link">Servicios</a></li>
+        <li class="nav-item"><a href="/products" class="nav-link">Productos</a></li>
+        <li class="nav-item"><a href="/contact-us" class="nav-link">Contáctenos</a></li>
+        <li class="nav-item"><a href="/doubts" class="nav-link">Dudas y Consultas</a></li>
+        <li class="nav-item"><a href="/login" class="nav-link">Iniciar Sesión</a></li>
+        <li class="nav-item"><a href="/register" class="nav-link">Registrate</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" >
+        <h1>MAE's Barbería - Agende su cita</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-7 heading-section  text-center">
+        <h2 class="mb-4">Elija el tipo de horario</h2>
+        <mat-card>
+          <mat-form-field class="selector">
+            <mat-label>Horario</mat-label>
+            <mat-select (selectionChange)="category($event)">
+              <mat-option *ngFor="let type of types" [value]="type.value">
+                {{type.display}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4" *ngIf="display_barbers">
+      <div class="col-md-7 heading-section  text-center">
+        <h2 class="mb-4">Elija el barbero de su preferencia</h2>
+        <mat-card>
+          <mat-form-field class="selector">
+            <mat-label>Barbero</mat-label>
+            <mat-select (selectionChange)="getBarber($event)">
+              <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+                {{barber.name + ' ' + barber.last_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4" *ngIf="display_schedule">
+      <div class="col-md-7 heading-section  text-center">
+        <mat-card>
+          <mat-form-field class="selector">
+            <input matInput [matDatepicker]="picker" placeholder="Seleccione la fecha" (dateChange)="getDate($event)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+    <div>
+      <div class="row justify-content-center mb-4" *ngIf="schedule">
+        <div class="col-md-7 heading-section  text-center">
+          <h2 class="mb-4">Escoja la hora de su cita</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <mat-card *ngFor="let item of schedule" class="card">
+          Hora: {{item.hour}}
+          <mat-card-actions>
+            <button mat-button (click)="setSchedule(item)">Agendar cita</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center mb-4" *ngIf="serviceData">
+      <div class="col-md-7 heading-section  text-center">
+        <h2 class="mb-4">Escoja el servicio</h2>
+        <mat-card>
+          <mat-form-field class="selector" >
+            <mat-label>Servicio</mat-label>
+            <mat-select (selectionChange)="getService($event)">
+              <mat-option *ngFor="let service of serviceData" [value]="service.id">
+                {{service.service_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-4" *ngIf="serviceData">
+    <div class="col-md-7 heading-section  text-center">
+      <mat-error class="title" *ngIf="message === true">
+        <p>La cita tendrá un costo de ₡{{price}}. Por favor, inicie sesión o regístrese.</p> 
+        <p>Nosotros guardaremos su cita</p></mat-error>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-4" *ngIf="message">
+    <div class="col-md-4 heading-section  text-center">
+      <mat-card>
+        <button mat-button *ngIf="message === true" class="button" (click)="login()">Iniciar Sesión</button>
+        <button mat-button *ngIf="message === true" class="button" (click)="register()">Registrarse</button>
+      </mat-card>
+    </div>
+  </div>
+
+</section>

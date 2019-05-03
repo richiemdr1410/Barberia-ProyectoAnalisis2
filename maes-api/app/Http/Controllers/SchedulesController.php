@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\ScheduleByDateCriteria;
 use App\Criteria\ScheduleCriteria;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class SchedulesController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $this->repository->pushCriteria(new ScheduleCriteria($request));
+        $this->repository->pushCriteria(new ScheduleByDateCriteria($request));
         $schedules = $this->repository->all();
 
         return response()->json([

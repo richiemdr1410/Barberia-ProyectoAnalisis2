@@ -1,0 +1,98 @@
+<app-menu [role]="role"></app-menu>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-7 heading-section  text-center">
+        <h2 class="mb-4">Elija el tipo de horario</h2>
+        <mat-card>
+          <mat-form-field class="selector">
+            <mat-label>Horario</mat-label>
+            <mat-select (selectionChange)="category($event)">
+              <mat-option *ngFor="let type of types" [value]="type.value">
+                {{type.display}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4" *ngIf="display_barbers">
+      <div class="col-md-7 heading-section  text-center">
+        <h2 class="mb-4">Elija el barbero de su preferencia</h2>
+        <mat-card>
+          <mat-form-field class="selector">
+            <mat-label>Barbero</mat-label>
+            <mat-select (selectionChange)="getBarber($event)">
+              <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+                {{barber.name + ' ' + barber.last_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-4" *ngIf="display_schedule">
+      <div class="col-md-7 heading-section  text-center">
+        <mat-card>
+          <mat-form-field class="selector">
+            <input matInput [matDatepicker]="picker" placeholder="Seleccione la fecha" (dateChange)="getDate($event)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+    <div>
+      <div class="row justify-content-center mb-4" *ngIf="schedule">
+        <div class="col-md-7 heading-section  text-center">
+          <h2 class="mb-4">Escoja la hora de su cita</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <mat-card *ngFor="let item of schedule" class="card">
+          Hora: {{item.hour}}
+          <mat-card-actions>
+            <button mat-button (click)="setSchedule(item)">Agendar cita</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center mb-4" *ngIf="serviceData">
+      <div class="col-md-7 heading-section  text-center">
+        <h2 class="mb-4">Escoja el servicio</h2>
+        <mat-card>
+          <mat-form-field class="selector" >
+            <mat-label>Servicio</mat-label>
+            <mat-select (selectionChange)="getService($event)">
+              <mat-option *ngFor="let service of serviceData" [value]="service.id">
+                {{service.service_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-4" *ngIf="serviceData">
+    <div class="col-md-7 heading-section  text-center">
+      <mat-error class="title" *ngIf="message === true">
+        <p>La cita tendrá un costo de ₡{{price}}.</p> 
+      </mat-error>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-4" *ngIf="message">
+    <div class="col-md-4 heading-section  text-center">
+      <mat-card>
+        <button mat-button *ngIf="message === true" class="button" (click)="reservar()">Reservar</button>
+      </mat-card>
+    </div>
+  </div>
+
+</section>

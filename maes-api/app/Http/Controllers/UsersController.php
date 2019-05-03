@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Criteria\AdministratorsCriteria;
 use App\Criteria\BarbersCriteria;
+use App\Entities\User;
 use Illuminate\Http\Request;
 use App\Criteria\ClientsCriteria;
 use App\Validators\UserValidator;
@@ -51,14 +52,9 @@ class UsersController extends Controller
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $users = $this->repository->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
-
-        return view('users.index', compact('users'));
+        return response()->json([
+            'data' => $users,
+        ]);
     }
 
     /**
@@ -66,28 +62,50 @@ class UsersController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function store(Request $request)
     {
         $request['password'] = Hash::make($request->input('password'));
-        try {
+        unset($request['confirm_password']);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $user = $this->repository->create($request->all());
-
+        $user_id = User::where('user_id', $request->input('user_id'))->first();
+        $email = User::where('email', $request->input('email'))->first();
+        if ($user_id !== null) {
             $response = [
-                'message' => 'User created.',
-                'data'    => $user->toArray(),
+                'error' => true,
+                'message' => 'La cédula ya ha sido registrada.'
             ];
 
-            return response()->json($response);
-        } catch (ValidatorException $e) {
-            return response()->json([
-                'error'   => true,
-                'message' => $e->getMessageBag()
-            ]);
+            return $response;
+        } else if ($email !== null) {
+            $response = [
+                'error' => true,
+                'message' => 'El correo ya se encuentra registrado.'
+            ];
+
+            return $response;
+        } else {
+
+
+            try {
+
+                $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+                $user = $this->repository->create($request->all());
+
+                $response = [
+                    'message' => 'User created.',
+                    'data' => $user->toArray(),
+                ];
+
+                return response()->json($response);
+            } catch (ValidatorException $e) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
         }
     }
 
@@ -138,6 +156,8 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $request['password'] = Hash::make($request->input('password'));
+        unset($request['message']);
+        unset($request['error']);
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);

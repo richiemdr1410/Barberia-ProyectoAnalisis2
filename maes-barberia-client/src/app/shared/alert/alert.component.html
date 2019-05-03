@@ -1,0 +1,7 @@
+<div *ngIf="alert" [ngClass]="(dismiss==true)?'animateOut':'animateOpen'" class="alert sticky alert-dismissible fade show {{ cssClass(alert) }}" role="alert" (click)="removeAlert()">
+  <h4 class="alert-heading">{{alert.title}}</h4>
+  <p [hidden]="!alert.message">{{alert.message}}</p>
+  <hr [hidden]="!alert.extra">
+  <p [hidden]="!alert.extra" class="mb-0">{{alert.extra}}</p>
+  <a [hidden]="dismiss"  class="close" (click)="removeAlert()">&times;</a>
+</div>

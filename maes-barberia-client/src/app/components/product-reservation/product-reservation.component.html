@@ -1,0 +1,41 @@
+<app-menu [role]="role"></app-menu>
+
+<div>
+    <h1 class="title">Productos Reservados</h1>
+    </div>
+    <div class="container table">
+    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="reservationData" matSort>
+        
+        <ng-container matColumnDef="name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let reservation">{{reservation.name}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="reservation_quantity">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad reservada</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let reservation">{{reservation.reservation_quantity}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="price">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let reservation">{{reservation.price * reservation.reservation_quantity}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="status">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let reservation">{{reservation.status ? 'Reservado' : 'Entregado'}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="actions">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cancelar Reservas</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let reservation">
+            <i class="fas fa-times delete" (click)="delete(reservation)"></i>
+        </mat-cell>
+        </ng-container>
+    
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>

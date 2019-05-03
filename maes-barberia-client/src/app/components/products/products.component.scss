@@ -1,0 +1,39 @@
+.text {
+    text-align: center;
+}
+
+.logo {
+    width: 150px;
+}
+
+.box { 
+    width: 500px; 
+    float: left; 
+    margin: 25px;
+}
+
+.box-right { 
+    width: 500px; 
+    float: right; 
+    margin: 25px;
+}
+
+.lista {
+    text-align: center;
+}
+
+.img {
+    width: 260px !important; 
+    height: 200px;
+}
+
+.reserva {
+    background-color: #0086b3;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}

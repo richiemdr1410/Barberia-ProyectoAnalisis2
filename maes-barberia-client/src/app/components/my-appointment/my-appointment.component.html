@@ -1,0 +1,49 @@
+<app-menu [role]="role"></app-menu>
+
+<h1 class="title">Mis Citas</h1>
+<div class="container table">
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="appointmentData" matSort>
+    
+    <ng-container matColumnDef="service_name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Servicio</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let appointment">{{appointment.service_name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="service_time">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Tiempo promedio</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let appointment">{{appointment.service_time}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let appointment">₡{{appointment.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Barbero</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let appointment">{{appointment.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let appointment">{{appointment.date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Hora</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let appointment">{{appointment.time}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let appointment">
+        <i class="fas fa-times delete" (click)="delete(appointment)"></i>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>

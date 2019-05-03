@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Criteria\AppointmentCriteria;
+use App\Criteria\BarberAppointmentCriteria;
+use App\Criteria\ClientAppointmentCriteria;
 use App\Entities\Appointment;
 use App\Entities\Schedule;
 use App\User;
@@ -10,7 +12,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\AppointmentCreateRequest;
 use App\Http\Requests\AppointmentUpdateRequest;
 use App\Repositories\AppointmentRepository;
 use App\Validators\AppointmentValidator;
@@ -66,15 +67,13 @@ class AppointmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  AppointmentCreateRequest $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(Request $request)
     {
-
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -203,17 +202,17 @@ class AppointmentsController extends Controller
     public function getAppointment(Request $request)
     {
         if (!$request->input('barber_id')) {
-            $request['barber_id'] = User::first()->id;
+            $request['barber_id'] = User::where('role_id', 2)->first()->id;
         }
 
         $date = $request->input('date');
         $day_of_week = date('N', strtotime($date));
-        $time = date("H:i", strtotime($request->input('time')));
+        $time = date("H:i", strtotime($request->input('time'))).':00';
         $schedule = Schedule::where('day', $day_of_week)->get();
         $total = Schedule::where('day', $day_of_week)->count();
         $valid = false;
         for ($i = 0; $i < $total -1; $i++) {
-            if($schedule[0]->hour >= $time && $time <= $schedule[$i + 1]->hour) {
+            if(strtotime($schedule[0]->hour) <= strtotime($time) && strtotime($time) <= strtotime($schedule[$i + 1]->hour)) {
                 $valid = true;
             }
         }
@@ -232,9 +231,6 @@ class AppointmentsController extends Controller
                 'message' => 'Error'
             ]);
         }
-
-
-
     }
 
     public function checkAvailable(Request $request)
@@ -256,4 +252,48 @@ class AppointmentsController extends Controller
         }
 
     }
+
+    public function listAppointmentByUser(Request $request)
+    {
+        $this->repository->pushCriteria(new ClientAppointmentCriteria($request));
+
+        $appointments = $this->repository->all();
+        return response()->json([
+            'data' => $appointments,
+        ]);
+    }
+
+    public function listAppointmentByBarber(Request $request)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(new BarberAppointmentCriteria($request));
+
+        $appointments = $this->repository->all();
+
+        return response()->json([
+            'data' => $appointments,
+        ]);
+    }
+
+    public function deleteAppointment($id)
+    {
+        Appointment::where('appointment_id', $id)->delete();
+
+        return response()->json([
+            'message' => 'Appointment deleted.',
+            'deleted' => true,
+        ]);
+    }
+
+    public function updateAppointment($id)
+    {
+        Appointment::where('appointment_id', $id)->update(['status' => 'completed']);
+
+        return response()->json([
+            'message' => 'Appointment updated.',
+            'deleted' => true,
+        ]);
+    }
+
+
 }

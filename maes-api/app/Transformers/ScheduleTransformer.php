@@ -24,7 +24,7 @@ class ScheduleTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
 
-            /* place your other model properties here */
+            'hour' =>  date( 'h:i:s a', strtotime($model->hour)),
 
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at

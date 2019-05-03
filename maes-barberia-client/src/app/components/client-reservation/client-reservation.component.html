@@ -1,0 +1,41 @@
+<app-menu [role]="role"></app-menu>
+<section class="ftco-section"> 
+    <h1 class="lista">Lista de productos</h1> 
+    <div *ngFor="let product of products;  let i=index" class="container">
+        <mat-card class="box" *ngIf="i % 2 === 0" style="text-align: center;">
+          <mat-card-header>
+            <mat-card-title>{{product.name}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="http://127.0.0.1:8000/api/image/products/{{product.image}}" class="img">
+          <mat-card-content>
+            <p>
+              <b>{{product.despcrition}}</b>
+            </p>
+            <p>
+              <b>₡ {{product.price}}</b>
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button class="reserva" (click)="reservar(product)">Reservar</button>
+          </mat-card-actions>
+        </mat-card>
+  
+        <mat-card class="box-right" *ngIf="i % 2 === 1" style="text-align: center;">
+          <mat-card-header>
+            <mat-card-title>{{product.name}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="http://127.0.0.1:8000/api/image/products/{{product.image}}" class="img">
+          <mat-card-content>
+            <p>
+              <b>{{product.despcrition}}</b>
+            </p>
+            <p>
+              <b>₡ {{product.price}}</b>
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button class="reserva" (click)="reservar(product  )">Reservar</button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+  </section>

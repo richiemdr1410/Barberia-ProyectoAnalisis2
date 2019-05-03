@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Presenters\SchedulePresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\scheduleRepository;
@@ -34,6 +35,16 @@ class ScheduleRepositoryEloquent extends BaseRepository implements ScheduleRepos
     {
 
         return ScheduleValidator::class;
+    }
+
+    /**
+     * Specify Presenter class name
+     *
+     * @return string
+     */
+    public function presenter()
+    {
+        return SchedulePresenter::class;
     }
 
 

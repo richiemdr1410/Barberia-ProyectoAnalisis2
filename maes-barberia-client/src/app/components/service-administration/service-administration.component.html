@@ -1,0 +1,35 @@
+<app-menu [role]="role"></app-menu>
+
+<h1 class="title">Servicios <i class="fas fa-plus add" (click)="add()"></i></h1>
+<div class="container table">
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="servicetData" matSort>
+    
+    <ng-container matColumnDef="service_name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let service">{{service.service_name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="service_time">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Tiempo promedio</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let service">{{service.service_time}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let service">{{service.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let service">
+        <i class="far fa-edit edit" (click)="edit(service)"></i>
+        <i class="fas fa-trash-alt delete" (click)="delete(service)"></i>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>

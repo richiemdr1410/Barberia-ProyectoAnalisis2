@@ -1,0 +1,71 @@
+//alert container
+.sticky {
+  position: fixed !important;
+  top: 16px;
+  left: 5%;
+  width: 90%;
+  z-index: 99999;
+}
+
+// Dismissible alerts
+// Expand the right padding and account for the close button's positioning.
+.alert-dismissible {
+  padding-right: 4rem;
+
+  // Adjust close link position
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1.25rem;
+    color: inherit;
+  }
+}
+
+// Animations
+.animateOpen {
+    -webkit-animation: moveOpen 4s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.animateOut {
+  -webkit-animation: moveOut 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes moveOpen {
+  from {
+      -webkit-transform: translate(0, -100px);
+  }
+  10% {
+      -webkit-transform: translate(0, 20px);
+  }
+  12% {
+      -webkit-transform: translate(0, 22px);
+  }
+  16% {
+      -webkit-transform: translate(0, 0px);
+  }
+  80% {
+      -webkit-transform: translate(0, 0px);
+  }
+  85% {
+      -webkit-transform: translate(0, 0px);
+  }
+}
+
+@-webkit-keyframes moveOut {
+  from {
+    -webkit-transform: translate(0, 0px);
+  }
+  10% {
+    -webkit-transform: translate(0, 22px);
+
+  }
+  100% {
+    -webkit-transform: translate(0, -100px);
+  }
+}

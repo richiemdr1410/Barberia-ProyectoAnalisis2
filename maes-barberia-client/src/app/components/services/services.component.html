@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <img class="logo" src="assets/images/logo.jpg" alt="Italian Trulli">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="/home" class="nav-link">Inicio</a></li>
+        <li class="nav-item"><a href="/about-us" class="nav-link">Acerca de nosotros</a></li>
+        <li class="nav-item"><a href="/appointments" class="nav-link">Citas</a></li>
+        <li class="nav-item"><a href="/products" class="nav-link">Productos</a></li>
+        <li class="nav-item"><a href="/contact-us" class="nav-link">Contáctenos</a></li>
+        <li class="nav-item"><a href="/doubts" class="nav-link">Dudas y Consultas</a></li>
+        <li class="nav-item"><a href="/login" class="nav-link">Iniciar Sesión</a></li>
+        <li class="nav-item"><a href="/register" class="nav-link">Registrate</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" >
+        <h1>MAE's Barbería - Servicios</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="ftco-section"> 
+  <h1 class="lista">Nuestros Servicios</h1> 
+  <div *ngFor="let service of services;  let i=index" class="container">
+      <mat-card class="box" *ngIf="i % 2 === 0" style="text-align: center;">
+        <mat-card-header>
+          <mat-card-title>{{service.service_name}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="http://127.0.0.1:8000/api/image/services/{{service.image}}" class="img">
+        <mat-card-content>
+          <p>
+            Tiempo: <b>{{service.service_time}}</b>
+          </p>
+          <p>
+            <b>₡ {{service.price}}</b>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="reserva" (click)="login()">Reservar</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="box-right" *ngIf="i % 2 === 1" style="text-align: center;">
+        <mat-card-header>
+          <mat-card-title>{{service.service_name}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="http://127.0.0.1:8000/api/image/services/{{service.image}}" class="img">
+        <mat-card-content>
+          <p>
+            Tiempo: <b>{{service.service_time}}</b>
+          </p>
+          <p>
+            <b>₡ {{service.price}}</b>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="reserva" (click)="login()">Reservar</button>
+        </mat-card-actions>
+      </mat-card>
+  </div>
+</section>

@@ -46,3 +46,38 @@
 
 # User specific bazel settings
 /maes-client/.bazelrc.user
+
+
+/maes-barberia-client/dist/
+/maes-barberia-client/bazel-out
+/maes-barberia-client/integration/bazel/bazel-*
+/maes-barberia-client/e2e_test.*
+/maes-barberia-client/node_modules
+/maes-barberia-client/tools/gulp-tasks/cldr/cldr-data/
+
+# Include when developing application packages.
+/maes-barberia-client/pubspec.lock
+/maes-barberia-client/.c9
+/maes-barberia-client/.idea/
+/maes-barberia-client/.settings/
+/maes-barberia-client/.vscode/launch.json
+/maes-barberia-client/.vscode/settings.json
+/maes-barberia-client/*.swo
+/maes-barberia-client/modules/.settings
+/maes-barberia-client/modules/.vscode
+
+# Don't check in secret files
+/maes-barberia-client/*secret.js
+
+# Ignore npm/yarn debug log
+/maes-barberia-client/npm-debug.log
+/maes-barberia-client/yarn-error.log
+
+# build-analytics
+/maes-barberia-client/.build-analytics
+
+# rollup-test output
+/maes-barberia-client/modules/rollup-test/dist/
+
+# User specific bazel settings
+/maes-barberia-client/.bazelrc.user

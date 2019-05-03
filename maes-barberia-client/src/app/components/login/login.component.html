@@ -1,0 +1,33 @@
+<div class="box">
+  <div id="header">
+    <div id="cont-lock"><i class="material-icons lock">lock</i></div>
+    <div id="bottom-head"><h1>Iniciar Sesión</h1></div>
+  </div> 
+   <form [formGroup]="myForm">
+    <div class="group">      
+      <input formControlName="email" class="inputMaterial" type="email" value="" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Correo</label>
+      <mat-error *ngIf="myForm.controls.email.errors">
+        <p class="error" *ngIf="myForm.controls.email.errors.required">Ingrese su email</p>
+        <p class="error" *ngIf="myForm.controls.email.errors.email">Ingrese un email válido</p>
+      </mat-error>
+    </div>
+	    <div class="group">      
+      <input formControlName="password" class="inputMaterial" type="password" value="" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Contraseña</label>
+      <mat-error *ngIf="myForm.controls.password.errors">
+        <p class="error" *ngIf="myForm.controls.password.required">Ingrese su contraseña</p>
+      </mat-error>
+    </div>
+    <button type="submit" [disabled]="myForm.invalid" (click)="login()">Entrar</button>
+  </form>
+  <div id="footer-box"><p class="footer-text">No eres miembro?<span class="sign-up" routerLink="/register" routerLinkActive="active"> Registrate ahora</span></p></div>
+</div>
+
+<div id="container-floating">  
+  <a routerLink="/" routerLinkActive="active"><span class="profile-name">Mae's Inicio</span></a>
+</div>

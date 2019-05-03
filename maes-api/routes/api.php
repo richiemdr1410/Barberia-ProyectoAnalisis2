@@ -43,8 +43,16 @@ Route::post('image/upload', 'UploadImagesController@saveFile');
 
 Route::get('reservation/user', 'ReservationsController@getReservationByUser');
 
+Route::delete('appointment/{id}', 'AppointmentsController@deleteAppointment');
+Route::put('appointment/{id}', 'AppointmentsController@updateAppointment');
 Route::post('add/appointment', 'AppointmentsController@getAppointment');
 Route::get('check/appointment', 'AppointmentsController@checkAvailable');
+Route::get('appointment/client', 'AppointmentsController@listAppointmentByUser');
+Route::get('appointment/barber', 'AppointmentsController@listAppointmentByBarber');
+
+Route::get('image/{type}/{name}', 'ImagesController@picture');
+
+Route::put('deliver/reservation/{id}', 'ReservationsController@deliver');
 
 
 

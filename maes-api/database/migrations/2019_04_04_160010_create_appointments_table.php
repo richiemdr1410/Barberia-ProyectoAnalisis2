@@ -16,8 +16,8 @@ class CreateAppointmentsTable extends Migration
 	public function up()
 	{
 		Schema::create('appointments', function(Blueprint $table) {
-            $table->increments('id');
-            $table->integer('barber_id');
+            $table->increments('appointment_id');
+            $table->integer('barber_id')->nullable();
             $table->integer('id_user');
             $table->integer('id_service');
             $table->string('status')->default('pending');

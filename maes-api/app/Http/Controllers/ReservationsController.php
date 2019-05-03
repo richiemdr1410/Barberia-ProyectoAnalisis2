@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\BarberReservationCriteriaCriteria;
 use App\Entities\Product;
 use App\Entities\Reservation;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class ReservationsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(BarberReservationCriteriaCriteria::class);
         $reservations = $this->repository->all();
 
         return response()->json([
@@ -188,5 +190,10 @@ class ReservationsController extends Controller
         return response()->json([
             'data' => $reservations,
         ]);
+    }
+
+    public function deliver($id, Request $request)
+    {
+        Reservation::where('reservation_id', $id)->update(['delivered' => 0]);
     }
 }

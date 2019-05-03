@@ -1,0 +1,27 @@
+<app-menu [role]="role"></app-menu>
+
+<h1 class="title">Servicios</h1>
+<div class="container table">
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="appointmentData" matSort>
+    
+    <ng-container matColumnDef="service_name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Servicio</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let appointment">{{appointment.service_name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Ganancia</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let appointment">₡{{appointment.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let appointment">{{appointment.name}}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>

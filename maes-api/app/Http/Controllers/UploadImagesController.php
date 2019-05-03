@@ -207,7 +207,7 @@ class UploadImagesController extends Controller
         $type = $request->input('type');
         $real_name = $file->getClientOriginalName();
         $location = \Config::get('values.location');
-        $destination_path = $location.'Barberia-ProyectoAnalisis2/maes-client/src/assets/images/'.$type;
+        $destination_path = $location.'Barberia-ProyectoAnalisis2/maes-api/resources/images/'.$type;
 
         $file->move($destination_path,  $real_name);
         return response()->json('File Save');

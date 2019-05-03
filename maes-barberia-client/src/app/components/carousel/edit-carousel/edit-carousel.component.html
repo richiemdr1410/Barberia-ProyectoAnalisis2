@@ -1,0 +1,25 @@
+<h1 mat-dialog-title class="title">Imagen: {{data.name}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm" class="example-form">
+    <mat-form-field >
+      <input matInput formControlName="name" placeholder="Nombre">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput formControlName="description" placeholder="Descripcion">
+    </mat-form-field>
+
+    
+      <mat-checkbox formControlName="enable">Activar?</mat-checkbox>
+    
+
+    <mat-form-field>
+      <ngx-mat-file-input formControlName="image" placeholder="Imagen" ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()" class="button">Cancelar</button>
+  <button mat-button (click)="update()" class="button">Editar</button>
+</div>

@@ -30,8 +30,11 @@ class ScheduleCriteria implements CriteriaInterface
     public function apply($model, RepositoryInterface $repository)
     {
         $date = $this->request->input('date');
-        $day_of_week = date('N', strtotime($date));
+        if ($date) {
+            $day_of_week = date('N', strtotime($date));
+            return $model->where('day', '<>', $day_of_week);
+        }
 
-        return $model->where('day', '<>', $day_of_week);
+        return $model;
     }
 }
